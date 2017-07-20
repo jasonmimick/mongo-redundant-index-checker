@@ -11,7 +11,7 @@ const util = {
 
     debug : function(msg) {
         if ( __debug ) {
-            print(msg);
+            printjson(msg);
         }
     },
 
@@ -25,6 +25,7 @@ const util = {
                 return legacyGetMongoDataParser.getJsonIndexInfo( util.loadFileLines( fn ) );
             } catch(error2) {
                 util.debug(error2)
+                util.debug(error2.stack);
                 throw error2;
             }
         }
@@ -85,7 +86,16 @@ const legacyGetMongoDataParser = {
                 util.debug('istring='+istring+ ' istring.length='+istring.length);
                 util.debug('line='+line);
                 if ( istring.length>0 ) {
-                    indexes.push( JSON.parse(istring) );
+                    istring = istring.replace(/\t/g," ")
+                    try {
+                        indexes.push( JSON.parse(istring) );
+                    } catch(error) {
+                        // could be due to extended JSON
+                        // e.g. NumberDecimal("2")
+                        util.debug(error);
+                        indexes.push( eval(istring) );
+                    }
+                    util.debug(JSON.stringify(indexes));
                 }
                 istring = "";
             }

@@ -62,6 +62,6 @@ Or here is a handy bash snippet you can edit with your instance connection
 information (needs ``curl``):
 
 <pre><code>$mongo --quiet _connection_info --eval "var _printJSON=true;$(curl -s -L https://raw.githubusercontent.com/mongodb/support-tools/master/getMongoData/getMongoData.js)" > getMongoData.output
-$mongo --quiet --nodb --eval "$(curl -s -L https://raw.githubusercontent.com/..../indexChecker.js)"
+$mongo --quiet --nodb --eval "$(curl -s -L https://raw.githubusercontent.com/jasonmimick/mongo-redundant-index-checker/master/indexChecker.js)"
 </code></pre>
 
