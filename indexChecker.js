@@ -34,7 +34,7 @@ const util = {
         try {
             return ls().filter( f => f.indexOf(name) != -1 )[0];
         } catch(error) {
-            debug("Unable to find file named '"+name+"in " + pwd());
+            util.debug("Unable to find file named '"+name+"in " + pwd());
             throw error;
         }
     },
@@ -52,7 +52,7 @@ const util = {
         try {
            return cat(knownFilename).split("\n");
         } catch(error) {
-            debug("util.loadFileByLine: can't cat or split '" + knownFilename + "'");
+            util.debug("util.loadFileByLine: can't cat or split '" + knownFilename + "'");
             throw error;
         }
     }
